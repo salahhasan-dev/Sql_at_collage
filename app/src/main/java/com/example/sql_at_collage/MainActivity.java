@@ -55,16 +55,29 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "added", Toast.LENGTH_SHORT).show();
             }
         });
-
+        // if item is written or selected, then selected be that item
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedName==null){
-                    Toast.makeText(MainActivity.this, "please select a name", Toast.LENGTH_SHORT).show();
+                boolean check = false;
+                // if nothing is written and nothing is selected, then toast
+                if(inputField.getText().toString().isEmpty() && selectedName==null){
+                    Toast.makeText(MainActivity.this, "nothing to delete", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                boolean check = db.delete(selectedName);
+                // if input field is not empty, then use that
+                if(!inputField.getText().toString().isEmpty())
+                {
+                    check = db.delete(inputField.getText().toString());
+                }
+                // else if selected name is not empty, then use that
+                else if(selectedName!=null)
+                {
+                    check = db.delete(selectedName);
+                }
+
                 Toast.makeText(MainActivity.this, "deleted " + check + " ", Toast.LENGTH_SHORT).show();
+                selectedName = null;
             }
         });
 
