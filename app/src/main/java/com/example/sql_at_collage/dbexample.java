@@ -57,14 +57,12 @@ public class dbexample extends SQLiteOpenHelper {
 
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.beginTransaction(); // Start transaction
-        try {
-            db.execSQL("DELETE FROM test;");
-            db.setTransactionSuccessful(); // Mark transaction as successful
-        } finally {
-            db.endTransaction(); // End transaction
-            db.close(); // Close the database
-        }
+        db.execSQL("DELETE FROM test;");
     }
 
+    public Cursor show_sort() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM test ORDER BY Name ASC;",null);
+        return cursor;
+    }
 }

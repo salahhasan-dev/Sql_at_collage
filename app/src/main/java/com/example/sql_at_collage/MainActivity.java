@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    Button add, delete, show, deleteAll, showFilter;
+    Button add, delete, show, deleteAll, showFilter, showSort;
     ListView listview;
     EditText inputField;
     dbexample db;
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         db = new dbexample(MainActivity.this);
         deleteAll=findViewById(R.id.button4);
         showFilter = findViewById(R.id.button6);
+        showSort = findViewById(R.id.button8);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,5 +139,30 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "shown", Toast.LENGTH_SHORT).show();
             }
         });
+
+        showSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                arrList = new ArrayList<>();
+                Cursor cursor = db.show_sort();
+                if(cursor==null){
+                    Toast.makeText(MainActivity.this, "no data", Toast.LENGTH_SHORT).show();
+                    arrAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrList);
+                    listview.setAdapter(arrAdapter);
+                    return;
+                }
+
+                while(cursor.moveToNext()){
+                    arrList.add(cursor.getString(1));
+                }
+                arrList.sort(null);
+                arrAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrList);
+                listview.setAdapter(arrAdapter);
+                Toast.makeText(MainActivity.this, "shown", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
     }
 }
