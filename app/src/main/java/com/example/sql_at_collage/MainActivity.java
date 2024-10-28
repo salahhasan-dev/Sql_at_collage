@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    Button add, delete, show, deleteAll;
+    Button add, delete, show, deleteAll, showFilter;
     ListView listview;
     EditText inputField;
     dbexample db;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         listview=findViewById(R.id.ListView);
         db = new dbexample(MainActivity.this);
         deleteAll=findViewById(R.id.button4);
-
+        showFilter = findViewById(R.id.button6);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "deleted " + check + " ", Toast.LENGTH_SHORT).show();
             }
         });
-        // what is wrong with this show function?
 
         show.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,5 +107,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        showFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(inputField.getText().toString().isEmpty()){
+                    return;
+                }
+                arrList = new ArrayList<>();
+                String first_two_characters = inputField.getText().toString().substring(0, 2);
+                Cursor cursor = db.show_filter(first_two_characters);
+
+                while(cursor.moveToNext()){
+                    arrList.add(cursor.getString(1));
+                    arrAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrList);
+                    listview.setAdapter(arrAdapter);
+                }
+                Toast.makeText(MainActivity.this, "shown", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

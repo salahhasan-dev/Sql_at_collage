@@ -49,6 +49,11 @@ public class dbexample extends SQLiteOpenHelper {
         }
         return db.rawQuery("SELECT * FROM test;",null);
     }
+    public Cursor show_filter(String firstTwoChars){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM test WHERE Name like '"+firstTwoChars+"%';",null);
+        return cursor;
+    }
 
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
