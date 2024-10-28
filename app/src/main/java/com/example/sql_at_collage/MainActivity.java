@@ -74,14 +74,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 arrList = new ArrayList<>();
                 Cursor cursor = db.show();
-
+                if(cursor==null){
+                    Toast.makeText(MainActivity.this, "no data", Toast.LENGTH_SHORT).show();
+                    arrAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrList);
+                    listview.setAdapter(arrAdapter);
+                    return;
+                }
 
                 while(cursor.moveToNext()){
                     arrList.add(cursor.getString(1));
                     arrAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrList);
                     listview.setAdapter(arrAdapter);
                 }
-
                 Toast.makeText(MainActivity.this, "shown", Toast.LENGTH_SHORT).show();
             }
         });

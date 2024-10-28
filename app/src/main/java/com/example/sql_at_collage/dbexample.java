@@ -42,6 +42,11 @@ public class dbexample extends SQLiteOpenHelper {
 
     public Cursor show(){
         SQLiteDatabase db = this.getWritableDatabase();
+        // check if the table is empty or not
+        Cursor cursor = db.rawQuery("SELECT * FROM test;",null);
+        if(cursor.getCount()==0){
+            return null;
+        }
         return db.rawQuery("SELECT * FROM test;",null);
     }
 
