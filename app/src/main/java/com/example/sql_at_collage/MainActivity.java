@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 arrList = new ArrayList<>();
                 Cursor cursor = db.show();
 
+
                 while(cursor.moveToNext()){
                     arrList.add(cursor.getString(1));
                     arrAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrList);
