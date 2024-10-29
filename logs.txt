@@ -1,0 +1,29 @@
+commit 53d7de436ccd9733f219a6a5136a9d9f2a8d74b4
+Author: salahhasan-dev <salahhasan.dev@gmail.com>
+Date:   Tue Oct 29 00:55:58 2024 +0300
+
+    delete working for selecting both from user input and from the list
+
+commit 2f273450dfda9635d41a2f2d70ead87bd1de947b
+Author: salahhasan-dev <salahhasan.dev@gmail.com>
+Date:   Tue Oct 29 00:32:39 2024 +0300
+
+    working showFilter
+
+commit 8da336c1bd3ec02fa1775bd92ab3079baebce36e
+Author: salahhasan-dev <salahhasan.dev@gmail.com>
+Date:   Tue Oct 29 00:15:01 2024 +0300
+
+    working show button after delete all
+
+commit 74e41fdf1a0ec7f117514c1599be8db6bf48bb92
+Author: salahhasan-dev <salahhasan.dev@gmail.com>
+Date:   Mon Oct 28 23:54:27 2024 +0300
+
+    testing git commits
+
+commit d67b84a924ddb9f1974b0ed049832f11e619c623
+Author: salahhasan-dev <salahhasan.dev@gmail.com>
+Date:   Mon Oct 28 23:49:17 2024 +0300
+
+    v 1.0

@@ -49,9 +49,13 @@ public class dbexample extends SQLiteOpenHelper {
         }
         return db.rawQuery("SELECT * FROM test;",null);
     }
+
     public Cursor show_filter(String firstTwoChars){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM test WHERE Name like '"+firstTwoChars+"%';",null);
+        if(cursor.getCount() == 0){
+            return null;
+        }
         return cursor;
     }
 
@@ -62,7 +66,11 @@ public class dbexample extends SQLiteOpenHelper {
 
     public Cursor show_sort() {
         SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor cursor = db.rawQuery("SELECT * FROM test ORDER BY Name ASC;",null);
+        if(cursor.getCount()==0){
+            return null;
+        }
         return cursor;
     }
 }

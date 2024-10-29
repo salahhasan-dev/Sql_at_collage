@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> arrList;
     ArrayAdapter<String> arrAdapter;
     String selectedName;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         deleteAll=findViewById(R.id.button4);
         showFilter = findViewById(R.id.button6);
         showSort = findViewById(R.id.button8);
+        textView = findViewById(R.id.textView);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 // else if selected name is not empty, then use that
                 else if(selectedName!=null)
                 {
+                    
                     check = db.delete(selectedName);
                 }
 
@@ -93,12 +97,14 @@ public class MainActivity extends AppCompatActivity {
                     listview.setAdapter(arrAdapter);
                     return;
                 }
-
+                int counter = 0;
                 while(cursor.moveToNext()){
                     arrList.add(cursor.getString(1));
-                    arrAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrList);
-                    listview.setAdapter(arrAdapter);
+                    counter ++;
                 }
+                arrAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrList);
+                listview.setAdapter(arrAdapter);
+                textView.setText("Number of Elements: " + counter);
                 Toast.makeText(MainActivity.this, "shown", Toast.LENGTH_SHORT).show();
             }
         });
@@ -162,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
 
     }
